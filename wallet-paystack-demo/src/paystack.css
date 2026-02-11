@@ -1,0 +1,103 @@
+/* General reset */
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #f4f6f8;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+/* Navbar */
+.navbar {
+  background: #0f9d58; /* Paystack green */
+  color: white;
+  padding: 1rem 2rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* Container layout */
+.container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* Card style */
+.card {
+  background: white;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Dashboard */
+.balance {
+  font-size: 2.5rem;
+  color: #0f9d58;
+  margin-top: 0.5rem;
+}
+
+/* Transaction Form */
+.transaction-form label {
+  display: block;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.transaction-form input,
+.transaction-form select {
+  width: 100%;
+  padding: 0.6rem;
+  margin-top: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.transaction-form button {
+  background: #0f9d58;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+.transaction-form button:hover {
+  background: #0c7a45;
+}
+
+/* Transaction List */
+.transactions ul {
+  list-style: none;
+  padding: 0;
+}
+
+.transactions li {
+  padding: 0.8rem;
+  border-bottom: 1px solid #eee;
+}
+
+.transactions li strong {
+  color: #0f9d58;
+}
+.card {
+  background: white;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.transaction-form button {
+  transition: background 0.3s ease;
+}
