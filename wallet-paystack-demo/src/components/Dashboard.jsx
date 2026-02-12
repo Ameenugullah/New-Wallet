@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaMoneyBillWave } from "react-icons/fa";
 
 const Dashboard = () => {
-  const [balance, setBalance] = useState(() => {
+  const [balance, setBalance] = useState(0);
+
+  useEffect(() => {
     const savedBalance = localStorage.getItem("balance");
-    return savedBalance ? Number(savedBalance) : 0;
-  });
+    if (savedBalance) {
+      setBalance(Number(savedBalance)); 
+    }
+  }, []);
 
   return (
     <div className="dashboard">

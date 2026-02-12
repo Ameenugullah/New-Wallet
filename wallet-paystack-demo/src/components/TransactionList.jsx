@@ -7,7 +7,7 @@ function TransactionList() {
   useEffect(() => {
     const savedTransactions =
       JSON.parse(localStorage.getItem("transactions")) || [];
-    setTransactions(savedTransactions);
+    setTransactions(savedTransactions); 
   }, []);
 
   return (
