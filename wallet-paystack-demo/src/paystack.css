@@ -6,6 +6,20 @@ body {
   padding: 0;
   color: #333;
 }
+body.light {
+  background: #f4f6f8;
+  color: #333;
+}
+
+body.dark {
+  background: #121212;
+  color: #f4f6f8;
+}
+
+body.dark .card {
+  background: #1e1e1e;
+  color: #f4f6f8;
+}
 
 /* Navbar */
 .navbar {

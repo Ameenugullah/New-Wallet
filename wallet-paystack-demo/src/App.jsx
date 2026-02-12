@@ -5,6 +5,7 @@ import Dashboard from "./components/Dashboard";
 import TransactionList from "./components/TransactionList";
 import TransactionForm from "./components/TransactionForm";
 import TransactionChart from "./components/TransactionChart";
+ import Settings from "./components/Settings";
 import Footer from "./components/Footer";
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -54,7 +55,12 @@ function App() {
                 </div>
               }
             />
+            <Route 
+              path="/settings"
+              element={<Settings onSettingsChange={() => setRefresh(!refresh)} />}
+            />
           </Routes>
+
         </div>
       </div>
       <Footer />
