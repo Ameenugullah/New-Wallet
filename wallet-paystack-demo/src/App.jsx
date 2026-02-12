@@ -15,15 +15,19 @@ function App() {
   return (
     <div>
       <Navbar />
-      <div className="container">
-        <div className="card">
-          <Dashboard key={refresh} />
+      <div className="container grid-layout">
+        <div className="left-panel">
+          <div className="card">
+            <Dashboard key={refresh} />
+          </div>
+          <div className="card">
+            <TransactionForm onTransaction={handleTransaction} />
+          </div>
         </div>
-        <div className="card">
-          <TransactionForm onTransaction={handleTransaction} />
-        </div>
-        <div className="card">
-          <TransactionList key={refresh} />
+        <div className="right-panel">
+          <div className="card">
+            <TransactionList key={refresh} />
+          </div>
         </div>
       </div>
     </div>

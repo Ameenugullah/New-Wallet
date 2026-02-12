@@ -101,3 +101,21 @@ body {
 .transaction-form button {
   transition: background 0.3s ease;
 }
+/* Grid layout */
+.grid-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 2rem;
+}
+
+/* Left and right panels */
+.left-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.right-panel {
+  display: flex;
+  flex-direction: column;
+}
