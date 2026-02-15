@@ -5,7 +5,8 @@ import Dashboard from "./components/Dashboard";
 import TransactionList from "./components/TransactionList";
 import TransactionForm from "./components/TransactionForm";
 import TransactionChart from "./components/TransactionChart";
- import Settings from "./components/Settings";
+import Settings from "./components/Settings";
+import ComfirmModal from "./components/ComfirmModal";
 import Footer from "./components/Footer";
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -38,6 +39,9 @@ function App() {
                   </div>
                   <div className="card">
                     <TransactionList key={refresh} />
+                  </div>
+                  <div className="card">
+                    <Settings key={refresh} />
                   </div>
                 </>
               }
