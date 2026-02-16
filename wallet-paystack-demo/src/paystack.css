@@ -1,4 +1,34 @@
-/* Global Reset */
+/* =========================
+   CSS VARIABLES (THEME)
+========================= */
+:root {
+  --primary: #7a2e2e;        /* dark pale red */
+  --primary-dark: #5e2222;
+  --primary-soft: #a14a4a;
+
+  --bg-main: #f6f7f9;
+  --bg-card: #ffffff;
+  --bg-sidebar: #1f1f23;
+
+  --text-main: #2e2e2e;
+  --text-muted: #6b7280;
+  --text-light: #ffffff;
+
+  --border-light: #e5e7eb;
+
+  --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 8px 20px rgba(0, 0, 0, 0.12);
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  --transition: all 0.3s ease;
+}
+
+/* =========================
+   GLOBAL RESET
+========================= */
 * {
   margin: 0;
   padding: 0;
@@ -6,225 +36,438 @@
 }
 
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f4f6f9;
-  color: #333;
+  font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.6;
 }
 
-/* Layout */
+/* =========================
+   LAYOUT
+========================= */
 .container {
   display: flex;
   min-height: 100vh;
 }
 
 .left-panel {
-  width: 220px;
-  background: #1e3c72;
-  color: #fff;
+  width: 240px;
+  background: linear-gradient(
+    180deg,
+    var(--primary),
+    var(--primary-dark)
+  );
+  color: var(--text-light);
 }
 
 .right-panel {
   flex: 1;
-  padding: 20px;
+  padding: 24px;
 }
 
-/* Navbar */
+/* =========================
+   NAVBAR
+========================= */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(90deg, #1e3c72, #2a5298);
-  color: #fff;
-  padding: 12px 24px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  background: var(--bg-card);
+  color: var(--text-main);
+  padding: 14px 28px;
+  border-bottom: 1px solid var(--border-light);
+  box-shadow: var(--shadow-soft);
 }
 
 .navbar-left h1 {
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--primary);
 }
 
 .navbar-center ul {
   list-style: none;
   display: flex;
-  gap: 20px;
+  gap: 24px;
 }
 
 .navbar-center ul li a {
-  color: #fff;
+  color: var(--text-muted);
   text-decoration: none;
   font-weight: 500;
-  transition: color 0.3s ease;
+  transition: var(--transition);
 }
 
 .navbar-center ul li a:hover {
-  color: #ffd700;
+  color: var(--primary);
 }
 
 .navbar-right {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 
 .username {
   font-weight: 600;
+  color: var(--text-main);
 }
 
 .logout-btn {
-  background: #ff4d4d;
+  background: var(--primary);
   border: none;
-  color: #fff;
-  padding: 6px 12px;
-  border-radius: 4px;
+  color: var(--text-light);
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   font-weight: 600;
-  transition: background 0.3s ease;
+  transition: var(--transition);
 }
 
 .logout-btn:hover {
-  background: #cc0000;
+  background: var(--primary-dark);
+  box-shadow: var(--shadow-hover);
 }
 
-/* Sidebar */
+/* =========================
+   SIDEBAR
+========================= */
 .sidebar {
-  padding: 20px;
+  padding: 28px 20px;
 }
 
 .sidebar h2 {
-  margin-bottom: 20px;
-  font-size: 1.2rem;
+  margin-bottom: 24px;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  opacity: 0.9;
 }
 
 .sidebar ul {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
 .sidebar ul li a {
-  color: #fff;
+  color: #d1d5db;
   text-decoration: none;
   font-weight: 500;
-  transition: color 0.3s ease;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
 }
 
 .sidebar ul li a:hover {
-  color: #ffd700;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-light);
 }
 
-/* Cards */
-.card {
-  background: #fff;
-  border-radius: 8px;
-  padding: 20px;
+/* =========================
+   CARDS
+========================= */
+.card,
+.dashboard-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  padding: 22px;
   margin-bottom: 20px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: var(--shadow-soft);
+  transition: var(--transition);
 }
 
-/* Forms (Login, Signup, TransactionForm) */
-form input, form select {
+.card:hover,
+.dashboard-card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+
+.dashboard-card h3 {
+  margin-bottom: 14px;
+  font-size: 1.1rem;
+  color: var(--primary);
+}
+
+/* =========================
+   FORMS
+========================= */
+form input,
+form select {
   width: 100%;
-  padding: 8px;
-  margin-bottom: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 10px 12px;
+  margin-bottom: 14px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  transition: var(--transition);
+}
+
+form input:focus,
+form select:focus {
+  border-color: var(--primary);
+  outline: none;
 }
 
 form button {
-  background: #2a5298;
+  background: var(--primary);
   border: none;
-  color: #fff;
-  padding: 8px 16px;
-  border-radius: 4px;
+  color: var(--text-light);
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   font-weight: 600;
-  transition: background 0.3s ease;
+  transition: var(--transition);
 }
 
 form button:hover {
-  background: #1e3c72;
+  background: var(--primary-dark);
+  box-shadow: var(--shadow-hover);
 }
 
-/* Transaction List */
+/* =========================
+   TRANSACTIONS
+========================= */
 .transaction-list {
   list-style: none;
-  padding: 0;
 }
 
 .transaction-list li {
-  background: #fff;
-  border: 1px solid #ddd;
-  margin-bottom: 8px;
-  padding: 10px;
-  border-radius: 4px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  margin-bottom: 10px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
   display: flex;
   justify-content: space-between;
+  transition: var(--transition);
+}
+
+.transaction-list li:hover {
+  box-shadow: var(--shadow-soft);
 }
 
 .transaction-list li span {
   font-weight: 500;
 }
 
-/* Settings */
+/* =========================
+   SETTINGS
+========================= */
 .settings button {
   display: block;
-  margin-bottom: 12px;
-  background: #2a5298;
+  margin-bottom: 14px;
+  background: var(--primary);
   border: none;
-  color: #fff;
-  padding: 8px 16px;
-  border-radius: 4px;
+  color: var(--text-light);
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   font-weight: 600;
-  transition: background 0.3s ease;
+  transition: var(--transition);
 }
 
 .settings button:hover {
-  background: #1e3c72;
+  background: var(--primary-dark);
 }
 
 .settings select {
   margin-top: 8px;
-  padding: 6px;
-  border-radius: 4px;
+  padding: 8px;
+  border-radius: var(--radius-sm);
 }
 
-/* Dashboard Flex Layout */
+/* =========================
+   DASHBOARD FLEX
+========================= */
 .dashboard-flex {
   display: flex;
-  flex-wrap: wrap;        /* allows wrapping on smaller screens */
-  gap: 20px;              /* spacing between cards */
-  align-items: flex-start; /* keeps cards aligned at the top */
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: flex-start;
 }
 
-.dashboard-card {
-  flex: 1 1 300px;        /* grow/shrink, minimum width 300px */
-  background: #fff;
-  border-radius: 8px;
-  margin: 20px;
-  padding: 16px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-.dashboard-card h3 {
-  margin-bottom: 12px;
-  font-size: 1.1rem;
-  color: #2a5298;
-
-}
-
-/* Charts */
+/* =========================
+   ANALYTICS / CHARTS
+========================= */
 .analytics-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 24px;
 }
 
 .analytics-grid canvas {
-  background: #fff;
-  border-radius: 8px;
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
   padding: 16px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: var(--shadow-soft);
+}
+.profile-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.profile-icon:hover {
+  transform: scale(1.1);
+}
+
+.default-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #2a5298;
+  color: #fff;
+  font-size: 18px;
+}
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+/* ---------- Large Tablets & Small Laptops ---------- */
+@media (max-width: 1024px) {
+  .left-panel {
+    width: 200px;
+  }
+
+  .navbar-center ul {
+    gap: 16px;
+  }
+
+  .dashboard-flex {
+    gap: 16px;
+  }
+
+  .analytics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Tablets ---------- */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .left-panel {
+    width: 100%;
+    height: auto;
+  }
+
+  .sidebar {
+    padding: 16px;
+  }
+
+  .sidebar ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .sidebar ul li a {
+    padding: 6px 10px;
+    font-size: 0.9rem;
+  }
+
+  .navbar {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 14px 18px;
+  }
+
+  .navbar-center {
+    order: 3;
+    width: 100%;
+  }
+
+  .navbar-center ul {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .right-panel {
+    padding: 18px;
+  }
+
+  .dashboard-card {
+    margin: 0;
+  }
+}
+
+/* ---------- Mobile Devices ---------- */
+@media (max-width: 480px) {
+  body {
+    font-size: 0.95rem;
+  }
+
+  .navbar-left h1 {
+    font-size: 1.3rem;
+  }
+
+  .navbar-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .username {
+    display: none;
+  }
+
+  .logout-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .sidebar h2 {
+    font-size: 1rem;
+    margin-bottom: 12px;
+  }
+
+  .sidebar ul {
+    gap: 8px;
+  }
+
+  .right-panel {
+    padding: 14px;
+  }
+
+  .card,
+  .dashboard-card {
+    padding: 16px;
+  }
+
+  form input,
+  form select,
+  form button {
+    font-size: 0.9rem;
+  }
+
+  .transaction-list li {
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-start;
+  }
+
+  .analytics-grid canvas {
+    padding: 12px;
+  }
+}
+
+/* ---------- Ultra-Small Screens ---------- */
+@media (max-width: 360px) {
+  .navbar-left h1 {
+    font-size: 1.15rem;
+  }
+
+  .sidebar ul li a {
+    font-size: 0.85rem;
+  }
+
+  .logout-btn {
+    padding: 8px;
+  }
 }

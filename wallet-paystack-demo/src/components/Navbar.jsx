@@ -1,49 +1,58 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
 import { AuthContext } from "./AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleProfileClick = () => {
+    navigate("/profile");
+  };
 
   return (
-    <header className="navbar">
+    <div className="navbar">
+      {/* Left side */}
       <div className="navbar-left">
-        <h1>Wallet App</h1>
+        <h1>Paystack Clone</h1>
       </div>
 
-      <nav className="navbar-center">
+      {/* Center navigation */}
+      <div className="navbar-center">
         <ul>
-          <li>
-            <Link to="/">Dashboard</Link>
-          </li>
-          <li>
-            <Link to="/transactions">Transactions</Link>
-          </li>
-          <li>
-            <Link to="/analytics">Analytics</Link>
-          </li>
-          <li>
-            <Link to="/settings">Settings</Link>
-          </li>
+          <li><a href="/">Dashboard</a></li>
+          <li><a href="/transactions">Transactions</a></li>
+          <li><a href="/analytics">Analytics</a></li>
+          <li><a href="/settings">Settings</a></li>
+          <li><a href="/profile">Profile</a></li>
         </ul>
-      </nav>
+      </div>
 
+      {/* Right side */}
       <div className="navbar-right">
-        {user ? (
+        {user && (
           <>
-            <span className="username">Hello, {user.username}</span>
-            <button onClick={logout} className="logout-btn">
-              Logout
-            </button>
-          </>
-        ) : (
-          <>
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Signup</Link>
+            <span className="username">{user.username}</span>
+            {user.profilePicture ? (
+              <img
+                src={user.profilePicture}
+                alt="Profile"
+                className="profile-icon"
+                onClick={handleProfileClick}
+              />
+            ) : (
+              <div
+                className="profile-icon default-avatar"
+                onClick={handleProfileClick}
+              >
+                👤
+              </div>
+            )}
+            <button className="logout-btn" onClick={logout}>Logout</button>
           </>
         )}
       </div>
-    </header>
+    </div>
   );
 };
 
