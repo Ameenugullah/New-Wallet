@@ -1,94 +1,62 @@
 import { useState } from "react";
 import { FaPlusCircle, FaMinusCircle, FaCheckCircle } from "react-icons/fa";
 
-function TransactionForm({ onTransaction }) {
-  const [type, setType] = useState("credit");
+
+const TransactionForm = ({ onBalanceChange }) => {
   const [amount, setAmount] = useState("");
-  const [description, setDescription] = useState("");
-  const [message, setMessage] = useState(""); // feedback message
+  const [type, setType] = useState("income");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newTransaction = {
-      id: Date.now(),
-      type,
-      amount: Number(amount),
-      description,
-      date: new Date().toLocaleString(),
-    };
+    // Parse current balance from localStorage
+    let currentBalance = parseFloat(localStorage.getItem("balance")) || 0;
+
+    // Update balance based on transaction type
+    if (type === "income") {
+      currentBalance += parseFloat(amount);
+    } else {
+      currentBalance -= parseFloat(amount);
+    }
+
+    // Save updated balance
+    localStorage.setItem("balance", currentBalance);
 
     // Save transaction to localStorage
-    const savedTransactions = JSON.parse(localStorage.getItem("transactions")) || [];
-    savedTransactions.push(newTransaction);
-    localStorage.setItem("transactions", JSON.stringify(savedTransactions));
+    const transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+    const newTransaction = {
+      id: Date.now(),
+      amount: parseFloat(amount),
+      type,
+      date: new Date().toLocaleString(),
+    };
+    transactions.push(newTransaction);
+    localStorage.setItem("transactions", JSON.stringify(transactions));
 
-    // Update balance
-    const currentBalance = Number(localStorage.getItem("balance")) || 0;
-    const updatedBalance =
-      type === "credit"
-        ? currentBalance + Number(amount)
-        : currentBalance - Number(amount);
-
-    localStorage.setItem("balance", updatedBalance);
-
-    // Notify parent to refresh Dashboard & TransactionList
-    if (onTransaction) onTransaction();
+    // Update Dashboard balance
+    if (onBalanceChange) onBalanceChange(currentBalance);
 
     // Reset form
     setAmount("");
-    setDescription("");
-
-    // Show success message
-    setMessage("Transaction added successfully!");
-    setTimeout(() => setMessage(""), 2000); // clear after 2s
+    setType("income");
   };
 
   return (
-    <form className="transaction-form" onSubmit={handleSubmit}>
-      <h2>Add Transaction</h2>
-
-      {/* Feedback message */}
-      {message && (
-        <p style={{ color: "green", fontWeight: "bold" }}>
-          <FaCheckCircle style={{ marginRight: "6px" }} />
-          {message}
-        </p>
-      )}
-
-      <label>
-        Type:
-        <select value={type} onChange={(e) => setType(e.target.value)}>
-          <option value="credit">Credit</option>
-          <option value="debit">Debit</option>
-        </select>
-      </label>
-
-      <label>
-        Amount:
-        <input
-          type="number"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          required
-        />
-      </label>
-
-      <label>
-        Description:
-        <input
-          type="text"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-        />
-      </label>
-
-      <button type="submit">
-        {type === "credit" ? <FaPlusCircle /> : <FaMinusCircle />} Add
-      </button>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="number"
+        placeholder="Enter amount"
+        value={amount}
+        onChange={(e) => setAmount(e.target.value)}
+        required
+      />
+      <select value={type} onChange={(e) => setType(e.target.value)}>
+        <option value="income">Income</option>
+        <option value="expense">Expense</option>
+      </select>
+      <button type="submit">Add Transaction</button>
     </form>
   );
-}
+};
 
 export default TransactionForm;

@@ -1,55 +1,151 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../components/AuthProvider";
+import { AuthContext } from "./AuthProvider";
 
 const Signup = () => {
-  const { login } = useContext(AuthContext); // reuse login to set user after signup
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({
+    firstName: "",
+    surname: "",
+    otherName: "",
+    dob: "",
+    address: "",
+    email: "",
+    username: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const [error, setError] = useState("");
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (username && password) {
-      // Save user credentials in localStorage (demo only, not secure!)
-      const newUser = { username, password };
-      localStorage.setItem("registeredUser", JSON.stringify(newUser));
-
-      // Automatically log in after signup
-      login(username, password);
-
-      // Redirect to dashboard
-      navigate("/");
-    } else {
-      alert("Please fill in all fields.");
+    // Basic validation
+    if (
+      !formData.firstName ||
+      !formData.surname ||
+      !formData.dob ||
+      !formData.address ||
+      !formData.email ||
+      !formData.username ||
+      !formData.password
+    ) {
+      setError("All required fields must be filled.");
+      return;
     }
+
+    if (formData.password !== formData.confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
+    // Save user to localStorage
+    const newUser = {
+      firstName: formData.firstName,
+      surname: formData.surname,
+      otherName: formData.otherName,
+      dob: formData.dob,
+      address: formData.address,
+      email: formData.email,
+      username: formData.username,
+      password: formData.password,
+    };
+    localStorage.setItem("user", JSON.stringify(newUser));
+
+    // Log user in immediately
+    login(newUser);
+
+    // Redirect to dashboard
+    navigate("/");
   };
 
   return (
     <div className="card">
-      <h2>Signup</h2>
+      <h2>Registration Form</h2>
+      {error && <p style={{ color: "red" }}>{error}</p>}
       <form onSubmit={handleSubmit}>
-        <div>
-          <input
-            type="text"
-            placeholder="Choose a username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <input
-            type="password"
-            placeholder="Choose a password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Signup</button>
+        <input
+          type="text"
+          name="firstName"
+          placeholder="First Name"
+          value={formData.firstName}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="text"
+          name="surname"
+          placeholder="Surname"
+          value={formData.surname}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="text"
+          name="otherName"
+          placeholder="Other Name"
+          value={formData.otherName}
+          onChange={handleChange}
+        />
+        <input
+          type="date"
+          name="dob"
+          placeholder="Date of Birth"
+          value={formData.dob}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="text"
+          name="address"
+          placeholder="Residential Address"
+          value={formData.address}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email Address"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="text"
+          name="username"
+          placeholder="Username"
+          value={formData.username}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="password"
+          name="confirmPassword"
+          placeholder="Confirm Password"
+          value={formData.confirmPassword}
+          onChange={handleChange}
+          required
+        />
+        <button type="submit">Register</button>
       </form>
     </div>
   );

@@ -17,6 +17,7 @@ function TransactionBarChart() {
   useEffect(() => {
     const savedTransactions =
       JSON.parse(localStorage.getItem("transactions")) || [];
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setTransactions(savedTransactions);
   }, []);
 

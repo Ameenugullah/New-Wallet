@@ -1,10 +1,12 @@
-
 import { useState } from "react";
 import { FaTrash, FaRedo, FaMoon, FaSun } from "react-icons/fa";
 import ComfirmModal from "./ComfirmModal";
 
 function Settings({ onSettingsChange }) {
   const [theme, setTheme] = useState("light");
+  const [currency, setCurrency] = useState(
+    localStorage.getItem("currency") || "USD"
+  );
   const [modal, setModal] = useState({ show: false, action: null });
 
   const handleConfirm = () => {
@@ -25,15 +27,28 @@ function Settings({ onSettingsChange }) {
     document.body.className = newTheme;
   };
 
+  const handleCurrencyChange = (e) => {
+    const newCurrency = e.target.value;
+    setCurrency(newCurrency);
+    localStorage.setItem("currency", newCurrency);
+    if (onSettingsChange) onSettingsChange();
+  };
+
   return (
     <div className="card">
       <h2>Settings</h2>
+
+      {/* Clear Transactions */}
       <button onClick={() => setModal({ show: true, action: "clear" })}>
         <FaTrash style={{ marginRight: "6px" }} /> Clear Transactions
       </button>
+
+      {/* Reset Balance */}
       <button onClick={() => setModal({ show: true, action: "reset" })}>
         <FaRedo style={{ marginRight: "6px" }} /> Reset Balance
       </button>
+
+      {/* Theme Toggle */}
       <button onClick={toggleTheme}>
         {theme === "light" ? (
           <FaMoon style={{ marginRight: "6px" }} />
@@ -43,9 +58,25 @@ function Settings({ onSettingsChange }) {
         Toggle Theme ({theme})
       </button>
 
+      {/* Currency Selection */}
+      <div style={{ marginTop: "12px" }}>
+        <label htmlFor="currency">Default Currency: </label>
+        <select
+          id="currency"
+          value={currency}
+          onChange={handleCurrencyChange}
+        >
+          <option value="USD">USD ($)</option>
+          <option value="NGN">NGN (₦)</option>
+          <option value="EUR">EUR (€)</option>
+          <option value="GBP">GBP (£)</option>
+        </select>
+      </div>
+
+      {/* Confirmation Modal */}
       <ComfirmModal
         show={modal.show}
-        title="Comfirm Action"
+        title="Confirm Action"
         message={
           modal.action === "clear"
             ? "Are you sure you want to clear all transactions?"

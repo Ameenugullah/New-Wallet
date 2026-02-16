@@ -12,6 +12,7 @@ import TransactionChart from "./components/TransactionChart";
 import TransactionBarChart from "./components/TransactionBarChart";
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
+import "./paystack.css";
 function App() {
   return (
     <AuthProvider>
@@ -36,13 +37,21 @@ function App() {
                   </ProtectedRoute>
                 }
               />
-              <Route
-                path="/transactions"
-                element={
-                  <ProtectedRoute>
-                    <TransactionFormList />
-                  </ProtectedRoute>
+             <Route
+                path="/transactions/new"
+  element={
+    <ProtectedRoute>
+      <TransactionForm />
+    </ProtectedRoute>
                 }
+              />
+              <Route
+               path="/transactions/list"
+  element={
+    <ProtectedRoute>
+      <TransactionList />
+    </ProtectedRoute>
+                 }
               />
               <Route
                 path="/analytics"
