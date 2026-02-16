@@ -10,7 +10,8 @@ function TransactionChart() {
   useEffect(() => {
     const savedTransactions =
       JSON.parse(localStorage.getItem("transactions")) || [];
-    setTransactions(savedTransactions); 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setTransactions(savedTransactions);
   }, []);
 
   const credits = transactions
@@ -27,14 +28,28 @@ function TransactionChart() {
       {
         data: [credits, debits],
         backgroundColor: ["#0f9d58", "#e74c3c"],
+        borderColor: ["#0c7a45", "#c0392b"],
+        borderWidth: 2,
       },
     ],
+  };
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: { position: "bottom" },
+      tooltip: {
+        callbacks: {
+          label: (context) => `₦${context.raw}`,
+        },
+      },
+    },
   };
 
   return (
     <div className="card">
       <h2>Transaction Breakdown</h2>
-      <Pie data={data} />
+      <Pie data={data} options={options} />
     </div>
   );
 }
