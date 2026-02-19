@@ -37,40 +37,41 @@ function Settings({ onSettingsChange }) {
   return (
     <div className="card">
       <h2>Settings</h2>
+      <div className="settings">
+        {/* Clear Transactions */}
+        <button onClick={() => setModal({ show: true, action: "clear" })}>
+          <FaTrash style={{ marginRight: "6px" }} /> Clear Transactions
+        </button>
 
-      {/* Clear Transactions */}
-      <button onClick={() => setModal({ show: true, action: "clear" })}>
-        <FaTrash style={{ marginRight: "6px" }} /> Clear Transactions
-      </button>
+        {/* Reset Balance */}
+        <button onClick={() => setModal({ show: true, action: "reset" })}>
+          <FaRedo style={{ marginRight: "6px" }} /> Reset Balance
+        </button>
 
-      {/* Reset Balance */}
-      <button onClick={() => setModal({ show: true, action: "reset" })}>
-        <FaRedo style={{ marginRight: "6px" }} /> Reset Balance
-      </button>
+        {/* Theme Toggle */}
+        <button onClick={toggleTheme}>
+          {theme === "light" ? (
+            <FaMoon style={{ marginRight: "6px" }} />
+          ) : (
+            <FaSun style={{ marginRight: "6px" }} />
+          )}
+          Toggle Theme ({theme})
+        </button>
 
-      {/* Theme Toggle */}
-      <button onClick={toggleTheme}>
-        {theme === "light" ? (
-          <FaMoon style={{ marginRight: "6px" }} />
-        ) : (
-          <FaSun style={{ marginRight: "6px" }} />
-        )}
-        Toggle Theme ({theme})
-      </button>
-
-      {/* Currency Selection */}
-      <div style={{ marginTop: "12px" }}>
-        <label htmlFor="currency">Default Currency: </label>
-        <select
-          id="currency"
-          value={currency}
-          onChange={handleCurrencyChange}
-        >
-          <option value="USD">USD ($)</option>
-          <option value="NGN">NGN (₦)</option>
-          <option value="EUR">EUR (€)</option>
-          <option value="GBP">GBP (£)</option>
-        </select>
+        {/* Currency Selection */}
+        <div style={{ marginTop: "12px" }}>
+          <label htmlFor="currency">Default Currency: </label>
+          <select
+            id="currency"
+            value={currency}
+            onChange={handleCurrencyChange}
+          >
+            <option value="USD">USD ($)</option>
+            <option value="NGN">NGN (₦)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="GBP">GBP (£)</option>
+          </select>
+        </div>
       </div>
 
       {/* Confirmation Modal */}

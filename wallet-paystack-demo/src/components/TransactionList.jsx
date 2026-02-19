@@ -7,6 +7,7 @@ function TransactionList() {
   useEffect(() => {
     const savedTransactions =
       JSON.parse(localStorage.getItem("transactions")) || [];
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setTransactions(savedTransactions); 
   }, []);
 
@@ -19,13 +20,13 @@ function TransactionList() {
         <ul>
           {transactions.map((tx) => (
             <li key={tx.id}>
-              {tx.type === "credit" ? (
+              {tx.type === "income" ? (
                 <FaArrowDown style={{ color: "green", marginRight: "6px" }} />
               ) : (
                 <FaArrowUp style={{ color: "red", marginRight: "6px" }} />
               )}
               <strong>{tx.type.toUpperCase()}</strong> ₦{tx.amount} –{" "}
-              {tx.description} <em>({tx.date})</em>
+              {tx.description || "No description"} <em>({tx.date})</em>
             </li>
           ))}
         </ul>

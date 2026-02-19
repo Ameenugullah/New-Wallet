@@ -9,6 +9,7 @@ const Dashboard = () => {
   // Load balance from localStorage when component mounts
   useEffect(() => {
     const savedBalance = localStorage.getItem("balance");
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setBalance(savedBalance ? parseFloat(savedBalance) : 0);
   }, []);
 

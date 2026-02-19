@@ -5,18 +5,10 @@ import { AuthContext } from "./AuthProvider";
 const ProtectedRoute = ({ children }) => {
   const { user } = useContext(AuthContext);
 
+  // Only check if user is logged in for now
   if (!user) {
     return <Navigate to="/login" />;
   }
-
-  if (!user.kycVerified) {
-    return <Navigate to="/kyc" />;
-  }
-
-  if (!user.bvnVerified) {
-    return <Navigate to="/bvn" />;
-  }
-
   return children;
 };
 

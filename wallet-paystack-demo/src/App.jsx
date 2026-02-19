@@ -9,6 +9,7 @@ import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
+import "./paystack.css";
 
 function App() {
   return (

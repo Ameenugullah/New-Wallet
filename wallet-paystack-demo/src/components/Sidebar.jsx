@@ -1,25 +1,29 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "./AuthProvider";
 
 const Sidebar = () => {
+  const { user } = useContext(AuthContext);
+
+  const getProfileStatus = () => {
+    if (!user) return "❌";
+    if (!user.kycVerified) return "⚠️ KYC Required";
+    if (user.kycVerified && !user.bvnVerified) return "⚠️ BVN Required";
+    if (user.kycVerified && user.bvnVerified) return "✅ Verified";
+    return "❌";
+  };
+
   return (
     <div className="sidebar">
-      <h2>Wallet App</h2>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Dashboard</Link>
-          </li>
-          <li>
-            <Link to="/transactions">Transactions</Link>
-          </li>
-          <li>
-            <Link to="/analytics">Analytics</Link>
-          </li>
-          <li>
-            <Link to="/settings">Settings</Link>
-          </li>
-        </ul>
-      </nav>
+      <ul>
+        <li><a href="/">Dashboard</a></li>
+        <li><a href="/transactions">Transactions</a></li>
+        <li><a href="/analytics">Analytics</a></li>
+        <li><a href="/settings">Settings</a></li>
+        <li>
+          <a href="/profile">Profile</a>
+          <span className="profile-status">{getProfileStatus()}</span>
+        </li>
+      </ul>
     </div>
   );
 };

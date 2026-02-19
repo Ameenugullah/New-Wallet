@@ -15,11 +15,11 @@ function TransactionChart() {
   }, []);
 
   const credits = transactions
-    .filter((tx) => tx.type === "credit")
+    .filter((tx) => tx.type === "income")
     .reduce((sum, tx) => sum + tx.amount, 0);
 
   const debits = transactions
-    .filter((tx) => tx.type === "debit")
+    .filter((tx) => tx.type === "expense")
     .reduce((sum, tx) => sum + tx.amount, 0);
 
   const data = {

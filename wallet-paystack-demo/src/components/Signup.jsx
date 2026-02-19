@@ -49,7 +49,7 @@ const Signup = () => {
       return;
     }
 
-    // Save user to localStorage
+    // Save user to localStorage with KYC & BVN flags set to false
     const newUser = {
       firstName: formData.firstName,
       surname: formData.surname,
@@ -59,19 +59,21 @@ const Signup = () => {
       email: formData.email,
       username: formData.username,
       password: formData.password,
+      kycVerified: false,
+      bvnVerified: false,
     };
     localStorage.setItem("user", JSON.stringify(newUser));
 
     // Log user in immediately
     login(newUser);
 
-    // Redirect to dashboard
-    navigate("/");
+    // Redirect to Profile (Tia.2 & Tia.3 requirements)
+    navigate("/profile");
   };
 
   return (
     <div className="card">
-      <h2>Registration Form</h2>
+      <h2>Registration Form (Tia.1)</h2>
       {error && <p style={{ color: "red" }}>{error}</p>}
       <form onSubmit={handleSubmit}>
         <input

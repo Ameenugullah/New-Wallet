@@ -23,14 +23,14 @@ function TransactionBarChart() {
 
   const grouped = transactions.reduce((acc, tx) => {
     const date = tx.date.split(",")[0];
-    if (!acc[date]) acc[date] = { credit: 0, debit: 0 };
+    if (!acc[date]) acc[date] = { income: 0, expense: 0 };
     acc[date][tx.type] += tx.amount;
     return acc;
   }, {});
 
   const labels = Object.keys(grouped);
-  const credits = labels.map((date) => grouped[date].credit);
-  const debits = labels.map((date) => grouped[date].debit);
+  const credits = labels.map((date) => grouped[date].income);
+  const debits = labels.map((date) => grouped[date].expense);
 
   const data = {
     labels,
