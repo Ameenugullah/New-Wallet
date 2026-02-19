@@ -15,14 +15,15 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <ul>
+         <li>
+          <a href="/profile">Profile</a>
+          <span className="profile-status">{getProfileStatus()}</span>
+        </li>
         <li><a href="/">Dashboard</a></li>
         <li><a href="/transactions">Transactions</a></li>
         <li><a href="/analytics">Analytics</a></li>
         <li><a href="/settings">Settings</a></li>
-        <li>
-          <a href="/profile">Profile</a>
-          <span className="profile-status">{getProfileStatus()}</span>
-        </li>
+       
       </ul>
     </div>
   );

@@ -40,7 +40,7 @@ const Navbar = () => {
         <button className="burger-btn" onClick={toggleSidebar} aria-label="Toggle sidebar">
           <FaBars />
         </button>
-        <h1>Paystack Clone</h1>
+        <h1>PayOut</h1>
       </div>
 
       {/* Center navigation */}

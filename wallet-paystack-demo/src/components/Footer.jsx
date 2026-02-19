@@ -1,7 +1,7 @@
 function Footer() {
   return (
     <footer className="footer">
-      <p>©️ 2026 Paystack Wallet Demo — Built by Aminu</p>
+      <p>©️ 2026 PayOut Wallet — Built by Aminu</p>
     </footer>
   );
 }

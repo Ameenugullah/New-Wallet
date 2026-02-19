@@ -9,6 +9,7 @@ import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Footer from "./components/Footer";
 import "./paystack.css";
 
 function App() {
@@ -64,6 +65,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
           </Routes>
+          <Footer />
         </div>
       </div>
     </Router>
