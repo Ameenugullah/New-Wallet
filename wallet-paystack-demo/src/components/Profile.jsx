@@ -1,22 +1,21 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { AuthContext } from "./AuthProvider";
 
 const Profile = () => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    const storedUser = localStorage.getItem("user");
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
   const [idNumber, setIdNumber] = useState("");
   const [bvn, setBvn] = useState("");
   const [error, setError] = useState("");
-  const [imagePreview, setImagePreview] = useState("");
+  const [imagePreview, setImagePreview] = useState(() => {
+    const storedUser = localStorage.getItem("user");
+    const parsedUser = storedUser ? JSON.parse(storedUser) : null;
+    return parsedUser && parsedUser.profilePicture ? parsedUser.profilePicture : "";
+  });
   const [pendingImage, setPendingImage] = useState("");
-  const { user: authUser, login } = useContext(AuthContext);
-
-  useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-    if (storedUser) {
-      setUser(storedUser);
-      if (storedUser.profilePicture) setImagePreview(storedUser.profilePicture);
-    }
-  }, [authUser]);
+  const { login } = useContext(AuthContext);
   // Handle image upload (preview only, save on button click)
   const handleImageChange = (e) => {
     const file = e.target.files[0];

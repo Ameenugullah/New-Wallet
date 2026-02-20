@@ -3,7 +3,9 @@ import { FaTrash, FaRedo, FaMoon, FaSun } from "react-icons/fa";
 import ComfirmModal from "./ComfirmModal";
 
 function Settings({ onSettingsChange }) {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") || "light"
+  );
   const [currency, setCurrency] = useState(
     localStorage.getItem("currency") || "USD"
   );
@@ -25,6 +27,7 @@ function Settings({ onSettingsChange }) {
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
     document.body.className = newTheme;
+    localStorage.setItem("theme", newTheme);
   };
 
   const handleCurrencyChange = (e) => {
@@ -49,13 +52,17 @@ function Settings({ onSettingsChange }) {
         </button>
 
         {/* Theme Toggle */}
-        <button onClick={toggleTheme}>
+        <button
+          onClick={toggleTheme}
+          className={`theme-toggle ${theme === "dark" ? "active" : ""}`}
+          aria-pressed={theme === "dark"}
+        >
           {theme === "light" ? (
-            <FaMoon style={{ marginRight: "6px" }} />
+            <FaMoon style={{ marginRight: "8px" }} />
           ) : (
-            <FaSun style={{ marginRight: "6px" }} />
+            <FaSun style={{ marginRight: "8px" }} />
           )}
-          Toggle Theme ({theme})
+          <span className="theme-label">{theme === "light" ? "Light" : "Dark"}</span>
         </button>
 
         {/* Currency Selection */}

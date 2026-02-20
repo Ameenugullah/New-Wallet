@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 
 // Create the context
+// eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext(null);
 
 // Create the provider component
@@ -31,7 +32,7 @@ const AuthProvider = ({ children }) => {
             setUser(saved);
             return true;
           }
-        } catch (e) {
+        } catch {
           // ignore parse errors
         }
       }

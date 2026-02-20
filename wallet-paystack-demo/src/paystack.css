@@ -341,6 +341,37 @@ form button:hover {
   border-radius: var(--radius-sm);
 }
 
+/* Theme toggle styling */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #f3f4f6;
+  color: var(--text-main);
+  border: 1px solid var(--border-light);
+  padding: 8px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.theme-toggle .theme-label {
+  text-transform: capitalize;
+}
+
+.theme-toggle.active {
+  background: linear-gradient(90deg, var(--primary-soft), var(--primary));
+  color: var(--text-light);
+  border-color: transparent;
+  box-shadow: var(--shadow-hover);
+}
+
+.theme-toggle:focus {
+  outline: 2px solid rgba(0,0,0,0.06);
+  outline-offset: 2px;
+}
+
 /* =========================
    DASHBOARD FLEX
 ========================= */
