@@ -15,6 +15,10 @@
   box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
 }
 
+/* Import a slanted, professional display font for the navbar title only */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,700&display=swap');
+
+
 /* Make sure right-panel has bottom padding so content isn't hidden behind footer */
 .right-panel {
   /* ...existing code... */
@@ -159,7 +163,11 @@ body {
 .navbar-left h1 {
   font-size: 1.6rem;
   font-weight: 700;
-  color: var(--brand-end);
+  color: var(--nav-text);
+  /* Use Playfair Display for a slanted, professional title (italic style) */
+  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  font-style: italic;
+  letter-spacing: 0.2px;
 }
 
 .navbar-center ul {
