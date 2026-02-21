@@ -40,13 +40,23 @@ const Analytics = () => {
     .filter((t) => t.type === "expense")
     .reduce((sum, t) => sum + t.amount, 0);
 
+  // read colors from CSS variables (fallback to hard-coded values)
+  const getCssVar = (name, fallback) => {
+    if (typeof window === "undefined" || !window.getComputedStyle) return fallback;
+    const v = getComputedStyle(document.documentElement).getPropertyValue(name);
+    return v ? v.trim() : fallback;
+  };
+
+  const brandColor = getCssVar("--progress-grad-start", "#2a5298");
+  const dangerColor = getCssVar("--danger", "#ff4d4d");
+
   const barData = {
     labels: ["Income", "Expense"],
     datasets: [
       {
         label: "Financial Overview",
         data: [income, expense],
-        backgroundColor: ["#2a5298", "#ff4d4d"],
+        backgroundColor: [brandColor, dangerColor],
       },
     ],
   };
@@ -56,7 +66,7 @@ const Analytics = () => {
     datasets: [
       {
         data: [income, expense],
-        backgroundColor: ["#2a5298", "#ff4d4d"],
+        backgroundColor: [brandColor, dangerColor],
       },
     ],
   };

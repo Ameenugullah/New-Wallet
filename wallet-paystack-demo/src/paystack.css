@@ -1,8 +1,8 @@
 /* Footer Styling */
 .footer {
   width: 100%;
-  background: var(--primary);
-  color: var(--text-light);
+  background: var(--brand-end);
+  color: var(--nav-text);
   text-align: center;
   padding: 14px 0 12px 0;
   font-size: 1rem;
@@ -42,8 +42,8 @@
 }
 /* Signup Button Style */
 .signup-btn {
-  background: var(--primary-soft);
-  color: var(--text-light);
+  background: var(--brand-soft);
+  color: var(--nav-text);
   border: none;
   padding: 8px 18px;
   border-radius: var(--radius-sm);
@@ -55,26 +55,15 @@
 }
 
 .signup-btn:hover {
-  background: var(--primary-dark);
-  color: #fff;
+  background: var(--brand-start);
+  color: var(--nav-text);
   box-shadow: var(--shadow-hover);
 }
 /* =========================
    CSS VARIABLES (THEME)
 ========================= */
 :root {
-  --primary: #7a2e2e;        /* dark pale red */
-  --primary-dark: #5e2222;
-  --primary-soft: #a14a4a;
-
-  --bg-main: #f6f7f9;
-  --bg-card: #ffffff;
-  --bg-sidebar: #1f1f23;
-
-  --text-main: #2e2e2e;
-  --text-muted: #6b7280;
-  --text-light: #ffffff;
-
+  /* Core spacing / shadows / radii */
   --border-light: #e5e7eb;
 
   --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -85,6 +74,30 @@
   --radius-lg: 14px;
 
   --transition: all 0.3s ease;
+
+  /* New palette variables (from merged styles) */
+  --brand-start: #1e3c72;
+  --brand-end: #2a5298;
+  --brand-soft: #436aa8;
+  --nav-text: #ffffff;
+  --nav-link: #ffffff;
+
+  --sidebar-bg: #ffffff;
+  --sidebar-border: #dddddd;
+
+  --card-bg: #ffffff;
+  --card-radius: 12px;
+  --card-shadow: 0 4px 12px rgba(0,0,0,0.05);
+
+  --progress-bg: #eeeeee;
+  --progress-grad-start: #2a5298;
+  --progress-grad-end: #4caf50;
+
+  --body-bg: #f4f6f9;
+  --body-text: #333;
+  --muted: #6b7280;
+  --text-on-dark: #ffffff;
+  --danger: #ff4d4d;
 }
 
 /* =========================
@@ -98,8 +111,8 @@
 
 body {
   font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--bg-main);
-  color: var(--text-main);
+  background-color: var(--body-bg);
+  color: var(--body-text);
   line-height: 1.6;
 }
 
@@ -115,10 +128,10 @@ body {
   width: 240px;
   background: linear-gradient(
     180deg,
-    var(--primary),
-    var(--primary-dark)
+    var(--brand-end),
+    var(--brand-start)
   );
-  color: var(--text-light);
+  color: var(--text-on-dark);
 }
 
 .right-panel {
@@ -134,10 +147,10 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: var(--bg-card);
-  color: var(--text-main);
+  background: linear-gradient(90deg, var(--brand-start), var(--brand-end));
+  color: var(--nav-text);
   margin-bottom: 24px;
-  padding: 10px 28px;
+  padding: 12px 20px;
   border-radius: var(--radius-md);
   border-bottom: 1px solid var(--border-light);
   box-shadow: var(--shadow-soft);
@@ -146,7 +159,7 @@ body {
 .navbar-left h1 {
   font-size: 1.6rem;
   font-weight: 700;
-  color: var(--primary);
+  color: var(--brand-end);
 }
 
 .navbar-center ul {
@@ -156,14 +169,16 @@ body {
 }
 
 .navbar-center ul li a {
-  color: var(--text-muted);
+  color: var(--nav-link);
   text-decoration: none;
   font-weight: 500;
   transition: var(--transition);
 }
 
 .navbar-center ul li a:hover {
-  color: var(--primary);
+  background: rgba(255,255,255,0.08);
+  border-radius: 6px;
+  color: var(--nav-link);
 }
 
 .navbar-right {
@@ -174,13 +189,13 @@ body {
 
 .username {
   font-weight: 600;
-  color: var(--text-main);
+  color: var(--body-text);
 }
 
 .logout-btn {
-  background: var(--primary);
+  background: var(--brand-end);
   border: none;
-  color: var(--text-light);
+  color: var(--nav-text);
   padding: 8px 14px;
   border-radius: var(--radius-sm);
   cursor: pointer;
@@ -189,15 +204,15 @@ body {
 }
 
 .logout-btn:hover {
-  background: var(--primary-dark);
+  background: var(--brand-start);
   box-shadow: var(--shadow-hover);
 }
 
-/* =========================
-   SIDEBAR
-========================= */
 .sidebar {
-  padding: 28px 20px;
+  height: 100%;
+  padding: 20px;
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--sidebar-border);
 }
 
 .sidebar h2 {
@@ -215,7 +230,7 @@ body {
 }
 
 .sidebar ul li a {
-  color: #d1d5db;
+  color: #2a5298;
   text-decoration: none;
   font-weight: 500;
   padding: 8px 12px;
@@ -224,8 +239,7 @@ body {
 }
 
 .sidebar ul li a:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--text-light);
+  color: #1e3c72;
 }
 
 /* =========================
@@ -233,7 +247,7 @@ body {
 ========================= */
 .card,
 .dashboard-card {
-  background: var(--bg-card);
+  background: var(--card-bg);
   border-radius: var(--radius-md);
   padding: 22px;
   margin-bottom: 20px;
@@ -250,7 +264,7 @@ body {
 .dashboard-card h3 {
   margin-bottom: 14px;
   font-size: 1.1rem;
-  color: var(--primary);
+  color: var(--brand-end);
 }
 
 /* =========================
@@ -269,14 +283,14 @@ form select {
 
 form input:focus,
 form select:focus {
-  border-color: var(--primary);
+  border-color: var(--brand-end);
   outline: none;
 }
 
 form button {
-  background: var(--primary);
+  background: var(--brand-end);
   border: none;
-  color: var(--text-light);
+  color: var(--nav-text);
   padding: 10px 18px;
   border-radius: var(--radius-sm);
   cursor: pointer;
@@ -285,7 +299,7 @@ form button {
 }
 
 form button:hover {
-  background: var(--primary-dark);
+  background: var(--brand-start);
   box-shadow: var(--shadow-hover);
 }
 
@@ -297,7 +311,7 @@ form button:hover {
 }
 
 .transaction-list li {
-  background: var(--bg-card);
+  background: var(--card-bg);
   border: 1px solid var(--border-light);
   margin-bottom: 10px;
   padding: 12px 14px;
@@ -321,9 +335,9 @@ form button:hover {
 .settings button {
   display: block;
   margin-bottom: 14px;
-  background: var(--primary);
+  background: var(--brand-end);
   border: none;
-  color: var(--text-light);
+  color: var(--nav-text);
   padding: 10px 18px;
   border-radius: var(--radius-sm);
   cursor: pointer;
@@ -332,7 +346,7 @@ form button:hover {
 }
 
 .settings button:hover {
-  background: var(--primary-dark);
+  background: var(--brand-start);
 }
 
 .settings select {
@@ -347,7 +361,7 @@ form button:hover {
   align-items: center;
   gap: 8px;
   background: #f3f4f6;
-  color: var(--text-main);
+  color: var(--body-text);
   border: 1px solid var(--border-light);
   padding: 8px 12px;
   border-radius: 999px;
@@ -361,8 +375,8 @@ form button:hover {
 }
 
 .theme-toggle.active {
-  background: linear-gradient(90deg, var(--primary-soft), var(--primary));
-  color: var(--text-light);
+  background: linear-gradient(90deg, var(--brand-soft), var(--brand-end));
+  color: var(--nav-text);
   border-color: transparent;
   box-shadow: var(--shadow-hover);
 }
@@ -392,7 +406,7 @@ form button:hover {
 }
 
 .analytics-grid canvas {
-  background: var(--bg-card);
+  background: var(--card-bg);
   border-radius: var(--radius-md);
   padding: 16px;
   box-shadow: var(--shadow-soft);
@@ -415,8 +429,8 @@ form button:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #2a5298;
-  color: #fff;
+  background: var(--brand-end);
+  color: var(--nav-text);
   font-size: 18px;
 }
 /* =========================
@@ -454,7 +468,7 @@ form button:hover {
   }
 
   .sidebar {
-    padding: 16px;
+    padding: 30px 20px;
   }
 
   .sidebar ul {
@@ -509,7 +523,7 @@ form button:hover {
     justify-content: center;
     background: transparent;
     border: none;
-    color: var(--primary);
+    color: var(--brand-end);
     font-size: 1.2rem;
     padding: 6px;
     margin-right: 8px;
@@ -615,3 +629,25 @@ form button:hover {
     padding: 8px;
   }
 }
+
+
+/* Progress bar (from merged styles, using variables) */
+.progress-container {
+  width: 100%;
+  background: var(--progress-bg);
+  border-radius: 8px;
+  margin: 12px 0;
+  height: 24px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--progress-grad-start), var(--progress-grad-end));
+  color: var(--nav-text);
+  text-align: center;
+  line-height: 24px;
+  font-size: 12px;
+  transition: width 0.5s ease;
+}
+
